@@ -1,11 +1,15 @@
 import 'package:dio/dio.dart';
 import '../error/exception.dart';
 import 'api_interceptor.dart';
+import 'auth_token_service.dart';
 
 class ApiClient {
   late final Dio _dio;
 
-  ApiClient({String baseUrl = 'https://jsonplaceholder.typicode.com'}) {
+  ApiClient({
+    String baseUrl = 'https://jsonplaceholder.typicode.com',
+    required AuthTokenService tokenService,
+  }) {
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
@@ -19,7 +23,7 @@ class ApiClient {
       ),
     );
 
-    _dio.interceptors.add(ApiInterceptor());
+    _dio.interceptors.add(ApiInterceptor(tokenService: tokenService));
   }
 
   Dio get dio => _dio;
@@ -101,11 +105,14 @@ class ApiClient {
   Exception _handleDioError(DioException dioError) {
     if (dioError.type == DioExceptionType.connectionTimeout ||
         dioError.type == DioExceptionType.receiveTimeout ||
+        dioError.type == DioExceptionType.sendTimeout ||
         dioError.type == DioExceptionType.connectionError) {
-      return NetworkException(message: 'No Internet Connection or Timeout');
+      return NetworkException(message: 'Không có kết nối Internet hoặc request bị timeout');
     } else {
       return ServerException(
-        message: dioError.response?.data?['message'] ?? dioError.message ?? 'Unknown Server Error',
+        message: dioError.response?.data?['message'] ??
+            dioError.message ??
+            'Lỗi server không xác định',
         statusCode: dioError.response?.statusCode,
       );
     }
