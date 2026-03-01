@@ -1,0 +1,61 @@
+Running `(cd /Users/nyal/.pub-cache/hosted/pub.dev/objective_c-9.3.0/; TMPDIR=/var/folders/nd/k1d_r92d0tvc_4swknv9kt3h0000gp/T/ PATH=/Users/nyal/.antigravity/antigravity/bin:/Users/nyal/fvm/default/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/opt/homebrew/bin HOME=/Users/nyal /Users/nyal/fvm/versions/stable/bin/cache/dart-sdk/bin/dart --packages=/Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/package_config.json /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/objective_c/7ad245dadc068daf8ba9d7bb51a8ef8e/hook.dill --config=/Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/objective_c/7ad245dadc068daf8ba9d7bb51a8ef8e/input.json )`.
+INFO: 2026-03-01 11:22:54.828353: Running `/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang --version`.
+
+INFO: 2026-03-01 11:22:54.846160: Running `/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang --version`.
+
+INFO: 2026-03-01 11:22:54.866736: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -c /Users/nyal/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/objective_c.c -fpic -I src -o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.c.o
+
+art_api_dl.c.o
+
+INFO: 2026-03-01 11:22:54.866856: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -c /Users/nyal/.pub-cache/hosted/pub.dev/objective_c-9.3.0/test/util.c -fpic -I src -o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/test/util.c.o
+
+INFO: 2026-03-01 11:22:54.867039: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -x objective-c -fobjc-arc -c /Users/nyal/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/objective_c.m -fpic -I src -o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.m.o
+
+ream_adapter.m.o
+
+INFO: 2026-03-01 11:22:54.867215: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -x objective-c -fobjc-arc -c /Users/nyal/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/ns_number.m -fpic -I src -o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/ns_number.m.o
+
+INFO: 2026-03-01 11:22:54.867301: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -x objective-c -fobjc-arc -c /Users/nyal/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/protocol.m -fpic -I src -o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/protocol.m.o
+
+INFO: 2026-03-01 11:22:54.867392: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -x objective-c -fobjc-arc -c /Users/nyal/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/objective_c_bindings_generated.m -fpic -I src -o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-03-01 11:22:54.944208: 
+INFO: 2026-03-01 11:22:54.944399: 
+INFO: 2026-03-01 11:22:54.944428: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/test/util.c.o
+INFO: 2026-03-01 11:22:54.944527: 
+INFO: 2026-03-01 11:22:54.944536: 
+INFO: 2026-03-01 11:22:54.944544: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.c.o
+INFO: 2026-03-01 11:22:54.944576: 
+INFO: 2026-03-01 11:22:54.944584: 
+INFO: 2026-03-01 11:22:54.944591: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-03-01 11:22:54.951292: 
+INFO: 2026-03-01 11:22:54.951351: 
+INFO: 2026-03-01 11:22:54.951369: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/observer.m.o
+
+INFO: 2026-03-01 11:22:54.954144: 
+INFO: 2026-03-01 11:22:54.954168: 
+INFO: 2026-03-01 11:22:54.954177: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/protocol.m.o
+
+INFO: 2026-03-01 11:22:55.094280: 
+INFO: 2026-03-01 11:22:55.094360: 
+INFO: 2026-03-01 11:22:55.094404: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-03-01 11:22:55.116073: 
+INFO: 2026-03-01 11:22:55.116123: 
+INFO: 2026-03-01 11:22:55.116142: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.m.o
+
+INFO: 2026-03-01 11:22:55.132472: 
+INFO: 2026-03-01 11:22:55.132533: 
+INFO: 2026-03-01 11:22:55.132553: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/ns_number.m.o
+
+INFO: 2026-03-01 11:22:55.166182: 
+INFO: 2026-03-01 11:22:55.166229: 
+INFO: 2026-03-01 11:22:55.166248: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-03-01 11:22:55.166687: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -shared -Wl,-encryptable -undefined dynamic_lookup -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/include/dart_api_dl.c.o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.c.o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/test/util.c.o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/input_stream_adapter.m.o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.m.o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/observer.m.o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/ns_number.m.o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/protocol.m.o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c_bindings_generated.m.o -o /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/objective_c.dylib
+
+INFO: 2026-03-01 11:22:55.204543: 
+INFO: 2026-03-01 11:22:55.204646: 
+INFO: 2026-03-01 11:22:55.204666: Generated /Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/objective_c.dylib
+
