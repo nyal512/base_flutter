@@ -62,6 +62,9 @@ class TranslationsHomeEn {
 
 	/// en: 'Nhấn để bắt đầu'
 	String get press_refresh => 'Nhấn để bắt đầu';
+
+	/// en: 'Không có bài viết nào'
+	String get empty => 'Không có bài viết nào';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -76,6 +79,7 @@ extension on Translations {
 			'home.loading' => 'Đang tải dữ liệu...',
 			'home.error' => 'Lỗi: {message}',
 			'home.press_refresh' => 'Nhấn để bắt đầu',
+			'home.empty' => 'Không có bài viết nào',
 			_ => null,
 		};
 	}

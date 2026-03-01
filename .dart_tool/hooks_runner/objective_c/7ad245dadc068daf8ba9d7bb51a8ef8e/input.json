@@ -21,9 +21,9 @@
     },
     "linking_enabled": false
   },
-  "out_dir_shared": "/Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/",
-  "out_file": "/Users/nyal/Documents/baseFlutter/base_flutter/.dart_tool/hooks_runner/objective_c/7ad245dadc068daf8ba9d7bb51a8ef8e/output.json",
+  "out_dir_shared": "/Users/babuithanh/Documents/nyal_code/base_flutter/.dart_tool/hooks_runner/shared/objective_c/build/",
+  "out_file": "/Users/babuithanh/Documents/nyal_code/base_flutter/.dart_tool/hooks_runner/objective_c/7ad245dadc068daf8ba9d7bb51a8ef8e/output.json",
   "package_name": "objective_c",
-  "package_root": "/Users/nyal/.pub-cache/hosted/pub.dev/objective_c-9.3.0/",
+  "package_root": "/Users/babuithanh/.pub-cache/hosted/pub.dev/objective_c-9.3.0/",
   "user_defines": {}
 }

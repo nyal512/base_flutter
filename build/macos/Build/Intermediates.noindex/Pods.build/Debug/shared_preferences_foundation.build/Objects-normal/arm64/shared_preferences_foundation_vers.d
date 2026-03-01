@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/nyal/Documents/baseFlutter/base_flutter/build/macos/Build/Intermediates.noindex/Pods.build/Debug/shared_preferences_foundation.build/module.modulemap \
-  /Users/nyal/Documents/baseFlutter/base_flutter/build/macos/Build/Intermediates.noindex/Pods.build/Debug/shared_preferences_foundation.build/DerivedSources/shared_preferences_foundation_vers.c
+  /Users/babuithanh/Documents/nyal_code/base_flutter/build/macos/Build/Intermediates.noindex/Pods.build/Debug/shared_preferences_foundation.build/module.modulemap \
+  /Users/babuithanh/Documents/nyal_code/base_flutter/build/macos/Build/Intermediates.noindex/Pods.build/Debug/shared_preferences_foundation.build/DerivedSources/shared_preferences_foundation_vers.c

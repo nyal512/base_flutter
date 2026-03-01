@@ -3,6 +3,7 @@
     "title": "Flutter Desktop MVVM Base",
     "loading": "Đang tải dữ liệu...",
     "error": "Lỗi: {message}",
-    "press_refresh": "Nhấn để bắt đầu"
+    "press_refresh": "Nhấn để bắt đầu",
+    "empty": "Không có bài viết nào"
   }
 }

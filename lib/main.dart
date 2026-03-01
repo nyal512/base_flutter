@@ -7,14 +7,18 @@ import 'dart:io';
 import 'core/di/injection_container.dart' as di;
 import 'core/routes/app_router.dart';
 import 'core/config/theme/app_theme.dart';
+import 'core/config/env/app_config.dart';
 import 'i18n/strings.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
-  
+
   // Load variables từ .env
   await dotenv.load(fileName: ".env");
+
+  // Khởi tạo AppConfig từ .env
+  AppConfig.initialize();
 
   // Khởi tạo Dependency Injection
   await di.init();
@@ -28,7 +32,7 @@ void main() async {
       center: true,
       backgroundColor: Colors.transparent,
       skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.hidden, // Hoặc standard tuỳ ý thiết kế
+      titleBarStyle: TitleBarStyle.hidden,
       title: 'Base Flutter Desktop',
     );
     windowManager.waitUntilReadyToShow(windowOptions, () async {
