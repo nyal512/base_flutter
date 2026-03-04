@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'dart:io';
 
@@ -14,16 +13,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
 
-  // Load variables từ .env
-  await dotenv.load(fileName: ".env");
-
-  // Khởi tạo AppConfig từ .env
+  // Initialize AppConfig (baked in via --dart-define-from-file)
   AppConfig.initialize();
 
-  // Khởi tạo Dependency Injection
+  // Initialize Dependency Injection
   await di.init();
 
-  // Cấu hình Desktop Window
+  // Configure Desktop Window
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
