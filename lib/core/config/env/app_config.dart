@@ -1,4 +1,3 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 enum AppEnvironment { dev, staging, production }
 
@@ -21,32 +20,41 @@ class AppConfig {
     required this.receiveTimeout,
   });
 
-  /// Khởi tạo AppConfig từ biến môi trường trong .env.
-  /// Gọi 1 lần duy nhất trong main() sau khi dotenv đã load.
+  /// Initializes AppConfig from environment variables provided at build time.
+  /// Uses --dart-define-from-file=.env.xxx
   static void initialize() {
-    final env = dotenv.env['ENVIRONMENT'] ?? 'dev';
+    const envStr = String.fromEnvironment('ENVIRONMENT', defaultValue: 'dev');
+    const baseUrl = String.fromEnvironment('BASE_URL',
+        defaultValue: 'https://jsonplaceholder.typicode.com');
+    const logging = String.fromEnvironment('ENABLE_LOGGING', defaultValue: 'true') == 'true';
+
+    final env = AppEnvironment.values.firstWhere(
+      (e) => e.name == envStr,
+      orElse: () => AppEnvironment.dev,
+    );
+
     switch (env) {
-      case 'production':
+      case AppEnvironment.production:
         _instance = AppConfig._(
           environment: AppEnvironment.production,
-          baseUrl: dotenv.env['BASE_URL'] ?? 'https://api.production.com',
-          enableLogging: false,
+          baseUrl: baseUrl,
+          enableLogging: logging,
           connectTimeout: const Duration(seconds: 15),
           receiveTimeout: const Duration(seconds: 15),
         );
-      case 'staging':
+      case AppEnvironment.staging:
         _instance = AppConfig._(
           environment: AppEnvironment.staging,
-          baseUrl: dotenv.env['BASE_URL'] ?? 'https://api.staging.com',
-          enableLogging: true,
+          baseUrl: baseUrl,
+          enableLogging: logging,
           connectTimeout: const Duration(seconds: 20),
           receiveTimeout: const Duration(seconds: 20),
         );
-      default: // dev
+      case AppEnvironment.dev:
         _instance = AppConfig._(
           environment: AppEnvironment.dev,
-          baseUrl: dotenv.env['BASE_URL'] ?? 'https://jsonplaceholder.typicode.com',
-          enableLogging: true,
+          baseUrl: baseUrl,
+          enableLogging: logging,
           connectTimeout: const Duration(seconds: 30),
           receiveTimeout: const Duration(seconds: 30),
         );
