@@ -3,9 +3,8 @@ import '../../../../core/viewmodel/base_view_model.dart';
 import '../../../../domain/entities/post.dart';
 import '../../../../domain/usecases/get_posts.dart';
 
-/// ViewModel cho HomeScreen.
-/// Tự quản lý trạng thái UI: danh sách posts, loading, lỗi.
-/// Gọi thẳng UseCase mà không cần Bloc làm trung gian.
+/// ViewModel for HomeScreen.
+/// Manages UI state: list of posts, loading, errors, and dashboard form data.
 class HomeViewModel extends BaseViewModel {
   final GetPosts _getPosts;
 
@@ -14,13 +13,74 @@ class HomeViewModel extends BaseViewModel {
   List<Post> _posts = [];
   List<Post> get posts => _posts;
 
+  // Form State
+  int _salesMethod = 0; // 0: Sequential, 1: Single, 2: Bulk
+  int _inactivityMode = 0; // 0: No limit, 1: Limit
+  String _inactivitySeconds = '10 ～ 90';
+  String _consumptionTax = '0 ～ 99';
+  String _reducedTax = '0 ～ 99';
+  int _eraMode = 0; // 0: AD, 1: Japanese Era
+  String _eraBaseYear = '20 [10 ～ 90]';
+  String _eraMark = 'A ～ Z';
+
+  // Getters
+  int get salesMethod => _salesMethod;
+  int get inactivityMode => _inactivityMode;
+  String get inactivitySeconds => _inactivitySeconds;
+  String get consumptionTax => _consumptionTax;
+  String get reducedTax => _reducedTax;
+  int get eraMode => _eraMode;
+  String get eraBaseYear => _eraBaseYear;
+  String get eraMark => _eraMark;
+
+  // Setters/Updaters
+  void setSalesMethod(int value) {
+    _salesMethod = value;
+    notifyListeners();
+  }
+
+  void setInactivityMode(int value) {
+    _inactivityMode = value;
+    notifyListeners();
+  }
+
+  void setInactivitySeconds(String value) {
+    _inactivitySeconds = value;
+    notifyListeners();
+  }
+
+  void setConsumptionTax(String value) {
+    _consumptionTax = value;
+    notifyListeners();
+  }
+
+  void setReducedTax(String value) {
+    _reducedTax = value;
+    notifyListeners();
+  }
+
+  void setEraMode(int value) {
+    _eraMode = value;
+    notifyListeners();
+  }
+
+  void setEraBaseYear(String value) {
+    _eraBaseYear = value;
+    notifyListeners();
+  }
+
+  void setEraMark(String value) {
+    _eraMark = value;
+    notifyListeners();
+  }
+
   @override
   void init() {
     super.init();
     fetchPosts();
   }
 
-  /// Gọi API lấy danh sách posts.
+  /// Fetches the list of posts from the API.
   Future<void> fetchPosts() async {
     setLoading(true);
     clearError();
@@ -35,10 +95,15 @@ class HomeViewModel extends BaseViewModel {
     setLoading(false);
   }
 
-  /// Hàm xử lý khi user nhấn Retry.
+  /// Retries fetching posts.
   void onRetry() => fetchPosts();
 
-  /// Logic khi nhấn vào một post — có thể điều hướng tại đây.
+  /// Logic to save form data.
+  void onSave() {
+    // Implement save logic here
+  }
+
+  /// Handles clicking on a post.
   void onPostOpen(int id) {
     // Navigation: context.go('/details/$id')
   }

@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-/// Base class cho tất cả ViewModel trong mô hình MVVM.
-/// Mọi ViewModel phải extends class này.
-/// Dùng [ChangeNotifier] để View tự động rebuild khi state thay đổi.
+/// Base class for all ViewModels in the MVVM pattern.
+/// Uses [ChangeNotifier] to automatically rebuild the View when the state changes.
 abstract class BaseViewModel extends ChangeNotifier {
   bool _isLoading = false;
   String? _errorMessage;
@@ -11,7 +10,7 @@ abstract class BaseViewModel extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   bool get hasError => _errorMessage != null;
 
-  /// Cập nhật trạng thái loading và thông báo cho View rebuild.
+  /// Updates the loading state and notifies listeners.
   @protected
   void setLoading(bool value) {
     if (_isLoading == value) return;
@@ -19,22 +18,22 @@ abstract class BaseViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Set thông báo lỗi và thông báo cho View rebuild.
+  /// Sets an error message and notifies listeners.
   @protected
   void setError(String? message) {
     _errorMessage = message;
     notifyListeners();
   }
 
-  /// Xóa lỗi hiện tại.
+  /// Clears the current error.
   @protected
   void clearError() => setError(null);
 
-  /// Gọi khi Widget được khởi tạo (initState).
+  /// Called when the Widget is initialized (initState).
   @mustCallSuper
   void init() {}
 
-  /// Gọi khi Widget bị dispose. ChangeNotifier.dispose() tự dọn listeners.
+  /// Called when the Widget is disposed.
   @override
   @mustCallSuper
   void dispose() {

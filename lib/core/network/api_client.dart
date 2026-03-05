@@ -107,12 +107,12 @@ class ApiClient {
         dioError.type == DioExceptionType.receiveTimeout ||
         dioError.type == DioExceptionType.sendTimeout ||
         dioError.type == DioExceptionType.connectionError) {
-      return NetworkException(message: 'Không có kết nối Internet hoặc request bị timeout');
+      return NetworkException(message: 'No internet connection or request timed out');
     } else {
       return ServerException(
         message: dioError.response?.data?['message'] ??
             dioError.message ??
-            'Lỗi server không xác định',
+            'Unknown server error',
         statusCode: dioError.response?.statusCode,
       );
     }

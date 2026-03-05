@@ -1,8 +1,8 @@
 
 enum AppEnvironment { dev, staging, production }
 
-/// Quản lý cấu hình theo môi trường (dev / staging / production).
-/// Được khởi tạo 1 lần từ .env và dùng toàn app qua [AppConfig.instance].
+/// Manages environment-specific configurations (dev / staging / production).
+/// Initialized once from .env and accessed throughout the app via [AppConfig.instance].
 class AppConfig {
   static AppConfig? _instance;
 
@@ -61,10 +61,10 @@ class AppConfig {
     }
   }
 
-  /// Truy cập AppConfig đã được khởi tạo.
+  /// Accesses the initialized AppConfig.
   static AppConfig get instance {
     assert(_instance != null,
-        'AppConfig chưa được khởi tạo. Gọi AppConfig.initialize() trong main() trước.');
+        'AppConfig has not been initialized. Call AppConfig.initialize() in main() first.');
     return _instance!;
   }
 

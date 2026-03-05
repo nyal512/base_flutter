@@ -21,7 +21,7 @@ class PostRepositoryImpl implements PostRepository {
   @override
   Future<Result<List<Post>, Failure>> getPosts() async {
     if (await networkInfo.isConnected) {
-      // Online → lấy từ server và cache lại
+      // Online -> fetch from server and cache
       try {
         final remotePosts = await remoteDataSource.getPosts();
         await localDataSource.cachePosts(remotePosts);
@@ -29,16 +29,16 @@ class PostRepositoryImpl implements PostRepository {
       } on ServerException catch (e) {
         return FailureResult(ServerFailure(e.message));
       } catch (e) {
-        return FailureResult(ServerFailure('Lỗi không xác định: $e'));
+        return FailureResult(ServerFailure('Unknown error: $e'));
       }
     } else {
-      // Offline → tìm dữ liệu trong cache
+      // Offline -> search in cache
       try {
         final localPosts = await localDataSource.getLastPosts();
         return Success(localPosts);
       } on CacheException {
         return const FailureResult(
-          NetworkFailure('Không có kết nối mạng và không có dữ liệu cache'),
+          NetworkFailure('No internet connection and no cached data available'),
         );
       }
     }

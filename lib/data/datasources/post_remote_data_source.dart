@@ -19,7 +19,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
       final data = response.data;
       if (data == null || data is! List) {
         throw ServerException(
-          message: 'Dữ liệu trả về không hợp lệ',
+          message: 'Invalid data format received',
           statusCode: response.statusCode,
         );
       }
@@ -32,7 +32,7 @@ class PostRemoteDataSourceImpl implements PostRemoteDataSource {
     } on NetworkException {
       rethrow;
     } catch (e) {
-      throw ServerException(message: 'Lỗi parse dữ liệu: $e');
+      throw ServerException(message: 'Data parsing error: $e');
     }
   }
 }

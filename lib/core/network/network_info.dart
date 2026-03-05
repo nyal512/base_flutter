@@ -1,10 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 abstract class NetworkInfo {
-  /// Trả về true nếu có kết nối Internet.
+  /// Returns true if there is an active internet connection.
   Future<bool> get isConnected;
 
-  /// Stream lắng nghe thay đổi kết nối real-time.
+  /// Stream to listen for real-time connectivity changes.
   Stream<bool> get onConnectivityChanged;
 }
 

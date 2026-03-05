@@ -1,9 +1,9 @@
 import 'package:logger/logger.dart';
 
-/// Singleton Logger dùng chung toàn app.
-/// Sử dụng thay vì tạo Logger mới ở từng class.
+/// Singleton Logger used throughout the app.
+/// Use this instead of creating a new Logger instance in each class.
 ///
-/// Ví dụ sử dụng:
+/// Example usage:
 /// ```dart
 /// AppLogger.i('Request success');
 /// AppLogger.e('Something went wrong', error: e, stackTrace: st);

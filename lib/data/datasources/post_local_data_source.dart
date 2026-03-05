@@ -17,7 +17,7 @@ class PostLocalDataSourceImpl implements PostLocalDataSource {
 
   @override
   Future<void> cachePosts(List<PostModel> postsToCache) {
-    // Chuyển List<PostModel> thành chuỗi JSON
+    // Encodes List<PostModel> to JSON string
     final jsonString = json.encode(postsToCache.map((e) => e.toJson()).toList());
     return sharedPreferences.setString(cachedPostsKey, jsonString);
   }
@@ -29,7 +29,7 @@ class PostLocalDataSourceImpl implements PostLocalDataSource {
       final List<dynamic> jsonList = json.decode(jsonString);
       return Future.value(jsonList.map((json) => PostModel.fromJson(json)).toList());
     } else {
-      throw CacheException(message: 'Không có dữ liệu trong Cache');
+      throw CacheException(message: 'No data found in cache');
     }
   }
 }

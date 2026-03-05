@@ -18,14 +18,14 @@ import '../../presentation/views/home/view_model/home_view_model.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  //! Core — SharedPreferences
+  //! Core - SharedPreferences
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
 
-  // Dùng AppConfig để lấy baseUrl (hỗ trợ multi-environment)
+  // Use AppConfig to get baseUrl (supports multi-environment)
   final config = AppConfig.instance;
 
-  //! Core — Network
+  //! Core - Network
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
 
   sl.registerLazySingleton<AuthTokenService>(
@@ -44,8 +44,8 @@ Future<void> init() async {
 
   //! Features - Posts
 
-  // ViewModels — Factory: tạo mới mỗi lần navigate vào màn hình
-  sl.registerFactory(() => HomeViewModel(getPosts: sl()));
+  // ViewModels - LazySingleton: share instance between content and layout
+  sl.registerLazySingleton(() => HomeViewModel(getPosts: sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetPosts(sl()));
