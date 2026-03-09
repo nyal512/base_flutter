@@ -7,6 +7,7 @@ class AppConfig {
   static AppConfig? _instance;
 
   final AppEnvironment environment;
+  final String appName;
   final String baseUrl;
   final bool enableLogging;
   final Duration connectTimeout;
@@ -14,6 +15,7 @@ class AppConfig {
 
   AppConfig._({
     required this.environment,
+    required this.appName,
     required this.baseUrl,
     required this.enableLogging,
     required this.connectTimeout,
@@ -24,6 +26,7 @@ class AppConfig {
   /// Uses --dart-define-from-file=.env.xxx
   static void initialize() {
     const envStr = String.fromEnvironment('ENVIRONMENT', defaultValue: 'dev');
+    const appName = String.fromEnvironment('APP_NAME', defaultValue: 'NEC Kiosk setting');
     const baseUrl = String.fromEnvironment('BASE_URL',
         defaultValue: 'https://jsonplaceholder.typicode.com');
     const logging = String.fromEnvironment('ENABLE_LOGGING', defaultValue: 'true') == 'true';
@@ -37,6 +40,7 @@ class AppConfig {
       case AppEnvironment.production:
         _instance = AppConfig._(
           environment: AppEnvironment.production,
+          appName: appName,
           baseUrl: baseUrl,
           enableLogging: logging,
           connectTimeout: const Duration(seconds: 15),
@@ -45,6 +49,7 @@ class AppConfig {
       case AppEnvironment.staging:
         _instance = AppConfig._(
           environment: AppEnvironment.staging,
+          appName: appName,
           baseUrl: baseUrl,
           enableLogging: logging,
           connectTimeout: const Duration(seconds: 20),
@@ -53,6 +58,7 @@ class AppConfig {
       case AppEnvironment.dev:
         _instance = AppConfig._(
           environment: AppEnvironment.dev,
+          appName: appName,
           baseUrl: baseUrl,
           enableLogging: logging,
           connectTimeout: const Duration(seconds: 30),

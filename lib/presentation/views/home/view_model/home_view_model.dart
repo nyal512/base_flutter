@@ -1,10 +1,13 @@
+import 'package:flutter/material.dart';
+import '../../../widgets/save_dialogs.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../../../../core/viewmodel/base_view_model.dart';
 import '../../../../domain/entities/post.dart';
 import '../../../../domain/usecases/get_posts.dart';
 
-/// ViewModel for HomeScreen.
-/// Manages UI state: list of posts, loading, errors, and dashboard form data.
+/// ViewModel cho HomeScreen.
+/// Tự quản lý trạng thái UI: danh sách posts, loading, lỗi.
+/// Gọi thẳng UseCase mà không cần Bloc làm trung gian.
 class HomeViewModel extends BaseViewModel {
   final GetPosts _getPosts;
 
@@ -16,17 +19,19 @@ class HomeViewModel extends BaseViewModel {
   // Form State
   int _salesMethod = 0; // 0: Sequential, 1: Single, 2: Bulk
   int _inactivityMode = 0; // 0: No limit, 1: Limit
-  String _inactivitySeconds = '10 ～ 90';
-  String _consumptionTax = '0 ～ 99';
-  String _reducedTax = '0 ～ 99';
+  String _inactivitySeconds = '10';
+  final List<String> _inactivityOptions = ['10', '20', '30', '40', '50', '60', '70', '80', '90'];
+  String _consumptionTax = '';
+  String _reducedTax = '';
   int _eraMode = 0; // 0: AD, 1: Japanese Era
-  String _eraBaseYear = '20 [10 ～ 90]';
-  String _eraMark = 'A ～ Z';
+  String _eraBaseYear = '';
+  String _eraMark = '';
 
   // Getters
   int get salesMethod => _salesMethod;
   int get inactivityMode => _inactivityMode;
   String get inactivitySeconds => _inactivitySeconds;
+  List<String> get inactivityOptions => _inactivityOptions;
   String get consumptionTax => _consumptionTax;
   String get reducedTax => _reducedTax;
   int get eraMode => _eraMode;
@@ -80,7 +85,13 @@ class HomeViewModel extends BaseViewModel {
     fetchPosts();
   }
 
-  /// Fetches the list of posts from the API.
+  @override
+  void dispose() {
+    // Keep dispose if needed
+    super.dispose();
+  }
+
+  /// Gọi API lấy danh sách posts.
   Future<void> fetchPosts() async {
     setLoading(true);
     clearError();
@@ -95,15 +106,33 @@ class HomeViewModel extends BaseViewModel {
     setLoading(false);
   }
 
-  /// Retries fetching posts.
+  /// Hàm xử lý khi user nhấn Retry.
   void onRetry() => fetchPosts();
 
-  /// Logic to save form data.
-  void onSave() {
-    // Implement save logic here
+  /// Logic lưu dữ liệu form.
+  void onSave(BuildContext context) async {
+    // Show first dialog: SaveTargetDialog
+    final bool? targetResult = await showDialog<bool>(
+      context: context,
+      builder: (context) => const SaveTargetDialog(),
+    );
+
+    if (targetResult == true) {
+      // Show second dialog: SaveDataSetDialog
+      if (!context.mounted) return;
+      final int? dataSetResult = await showDialog<int>(
+        context: context,
+        builder: (context) => const SaveDataSetDialog(),
+      );
+
+      if (dataSetResult != null) {
+        debugPrint('Saving Home Form Data to DataSet ${dataSetResult + 1}...');
+        // Finalize save logic
+      }
+    }
   }
 
-  /// Handles clicking on a post.
+  /// Logic khi nhấn vào một post — có thể điều hướng tại đây.
   void onPostOpen(int id) {
     // Navigation: context.go('/details/$id')
   }

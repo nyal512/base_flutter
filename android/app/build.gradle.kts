@@ -5,8 +5,15 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val dartEnvironmentVariables = project.findProperty("DART_DEFINES")?.toString()?.split(",")?.associate {
+    val pair = it.split("=")
+    pair[0] to (if (pair.size > 1) pair[1] else "")
+} ?: emptyMap()
+
+val appName = dartEnvironmentVariables["APP_NAME"] ?: "NEC Kiosk setting"
+
 android {
-    namespace = "com.example.base_flutter"
+    namespace = "jp.co.nec.kiosk.setting"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,13 +28,15 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.base_flutter"
+        applicationId = "jp.co.nec.kiosk.setting"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        manifestPlaceholders["appName"] = appName
     }
 
     buildTypes {

@@ -36,8 +36,8 @@ class SideMenu extends StatelessWidget {
                 _buildMenuItem(context, '販売モード', 'assets/icons/ic_store.svg', '/'),
                 _buildMenuItem(context, 'ブザー音／音声', 'assets/icons/ic_sound.svg', '/sound'),
                 _buildMenuItem(context, '入金金種', 'assets/icons/ic_money.svg', '/payment'),
-                _buildMenuItem(context, '入金制限', 'assets/icons/ic_wallet.svg', '/limit'),
-                _buildMenuItem(context, '号機', 'assets/icons/ic_fingerprint.svg', '/machine'),
+                _buildMenuItem(context, '入金制限', 'assets/icons/ic_wallet.svg', '/wallet'),
+                _buildMenuItem(context, '号機', 'assets/icons/ic_fingerprint.svg', '/fingerprint'),
                 _buildMenuItem(context, '発券連番', 'assets/icons/ic_receipt.svg', '/ticket'),
                 _buildMenuItem(context, '集計様式', 'assets/icons/ic_table.svg', '/report'),
                 _buildMenuItem(context, '集計時間帯', 'assets/icons/ic_database.svg', '/time'),
@@ -46,11 +46,11 @@ class SideMenu extends StatelessWidget {
                 _buildMenuItem(context, 'オーダリング', 'assets/icons/ic_list_dashes.svg', '/ordering'),
                 _buildMenuItem(context, 'FTP', 'assets/icons/ic_cloud.svg', '/ftp'),
                 _buildMenuItem(context, '親子', 'assets/icons/ic_tree_view.svg', '/parent'),
+                _buildExpansionMenu(context, 'オプション', 'assets/icons/ic_grid_four.svg', ['/option1', '/option2', '/option3', '/option4']),
+                _buildMenuItem(context, '集計詳細', 'assets/icons/ic_graph.svg', '/details'),
               ],
             ),
           ),
-          _buildMenuItem(context, 'オプション', 'assets/icons/ic_grid_four.svg', '/settings', isExpansion: true),
-          _buildMenuItem(context, '集計詳細', 'assets/icons/ic_graph.svg', '/details'),
         ],
       ),
     );
@@ -78,6 +78,7 @@ class SideMenu extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14.sp,
+                    color: Colors.black,
                     letterSpacing: -0.5,
                   ),
                 ),
@@ -121,7 +122,7 @@ class SideMenu extends StatelessWidget {
       child: Container(
         height: 48.h,
         decoration: BoxDecoration(
-          color: isActive ? Colors.indigo.shade50.withOpacity(0.5) : Colors.transparent,
+          color: isActive ? Colors.indigo.shade50.withValues(alpha: 0.5) : Colors.transparent,
           border: Border(
             left: BorderSide(
               color: isActive ? primaryColor : Colors.transparent,
@@ -156,6 +157,83 @@ class SideMenu extends StatelessWidget {
             ),
             if (isExpansion)
               Icon(Icons.keyboard_arrow_down, size: 16.sp, color: Colors.grey.shade400),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildExpansionMenu(
+    BuildContext context,
+    String title,
+    String pathIcon,
+    List<String> childRoutes,
+  ) {
+    final isAnyChildActive = childRoutes.contains(currentRoute);
+    final primaryColor = const Color(0xFF6366F1);
+
+    return Theme(
+      data: Theme.of(context).copyWith(
+        dividerColor: Colors.transparent,
+      ),
+      child: ExpansionTile(
+        initiallyExpanded: isAnyChildActive,
+        tilePadding: EdgeInsets.symmetric(horizontal: 12.w),
+        leading: SvgPicture.asset(
+          pathIcon,
+          width: 18.sp,
+          height: 18.sp,
+          colorFilter: ColorFilter.mode(
+            isAnyChildActive ? primaryColor : Colors.grey.shade600,
+            BlendMode.srcIn,
+          ),
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: isAnyChildActive ? primaryColor : Colors.grey.shade700,
+            fontWeight: isAnyChildActive ? FontWeight.bold : FontWeight.normal,
+            fontSize: 12.sp,
+          ),
+        ),
+        iconColor: isAnyChildActive ? primaryColor : Colors.grey.shade400,
+        collapsedIconColor: Colors.grey.shade400,
+        children: [
+          _buildSubMenuItem(context, 'オプション 1', '/option1'),
+          _buildSubMenuItem(context, 'オプション 2', '/option2'),
+          _buildSubMenuItem(context, 'オプション 3', '/option3'),
+          _buildSubMenuItem(context, 'オプション 4', '/option4'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSubMenuItem(BuildContext context, String title, String route) {
+    final isActive = currentRoute == route;
+    final primaryColor = const Color(0xFF6366F1);
+
+    return InkWell(
+      onTap: () => context.go(route),
+      child: Container(
+        height: 48.h,
+        padding: EdgeInsets.only(left: 44.w, right: 12.w), // Indent sub-items
+        decoration: BoxDecoration(
+          color: isActive ? Colors.indigo.shade50.withValues(alpha: 0.5) : Colors.transparent,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: isActive ? primaryColor : Colors.grey.shade600,
+                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                  fontSize: 12.sp,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
       ),

@@ -8,6 +8,15 @@ class AppTheme {
           centerTitle: true,
           elevation: 0,
         ),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: NoTransitionsBuilder(),
+            TargetPlatform.iOS: NoTransitionsBuilder(),
+            TargetPlatform.macOS: NoTransitionsBuilder(),
+            TargetPlatform.windows: NoTransitionsBuilder(),
+            TargetPlatform.linux: NoTransitionsBuilder(),
+          },
+        ),
       );
 
   static ThemeData get dark => ThemeData(
@@ -20,5 +29,29 @@ class AppTheme {
           centerTitle: true,
           elevation: 0,
         ),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: NoTransitionsBuilder(),
+            TargetPlatform.iOS: NoTransitionsBuilder(),
+            TargetPlatform.macOS: NoTransitionsBuilder(),
+            TargetPlatform.windows: NoTransitionsBuilder(),
+            TargetPlatform.linux: NoTransitionsBuilder(),
+          },
+        ),
       );
+}
+
+class NoTransitionsBuilder extends PageTransitionsBuilder {
+  const NoTransitionsBuilder();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return child;
+  }
 }
