@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/di/injection_container.dart';
-import '../../widgets/widgets.dart';
 import '../../../core/utils/responsive_utils.dart';
 import 'view_model/home_view_model.dart';
 
@@ -25,174 +25,195 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListenableBuilder(
       listenable: _viewModel,
       builder: (context, _) {
-        return SingleChildScrollView(
-          padding: EdgeInsets.all(24.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        _buildSalesMethodSection(),
-                        SizedBox(height: 24.h),
-                        _buildTaxRateSection(),
-                      ],
+        return Scaffold(
+          backgroundColor: const Color(0xFFF9FAFB),
+          body: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF3F4F6),
+                    borderRadius: BorderRadius.circular(4.w),
+                    border: Border.all(color: const Color(0xFFD1D5DB), width: 1.w),
+                  ),
+                  child: Text(
+                    'システム管理ツール',
+                    style: TextStyle(
+                      fontSize: 11.sp,
+                      color: const Color(0xFF374151),
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(width: 24.w),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        _buildInactivitySection(),
-                        SizedBox(height: 24.h),
-                        _buildEraSection(),
-                      ],
-                    ),
+                ),
+                SizedBox(height: 12.h),
+                Text(
+                  '販売画面レイアウト調整',
+                  style: TextStyle(
+                    fontSize: 28.sp,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF111827),
                   ),
-                ],
-              ),
-            ],
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                  '券売機の運用設定および販売画面の表示レイアウトを一括管理します。',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: const Color(0xFF6B7280),
+                  ),
+                ),
+                SizedBox(height: 48.h),
+                _buildGrid(),
+              ],
+            ),
           ),
         );
       },
     );
   }
 
-  Widget _buildSalesMethodSection() {
-    return FormCard(
-      title: '販売方式',
-      child: FormRow(
-        label: '販売方式',
-        content: Row(
-          children: [
-            _buildRadio('連売', 0, _viewModel.salesMethod, (v) => _viewModel.setSalesMethod(v!)),
-            _buildRadio('単売', 1, _viewModel.salesMethod, (v) => _viewModel.setSalesMethod(v!)),
-            _buildRadio('一括', 2, _viewModel.salesMethod, (v) => _viewModel.setSalesMethod(v!)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildInactivitySection() {
-    return FormCard(
-      title: '無操作時間',
-      child: Column(
-        children: [
-          FormRow(
-            label: '無操作時間',
-            content: Row(
-              children: [
-                _buildRadio('制限なし', 0, _viewModel.inactivityMode, (v) => _viewModel.setInactivityMode(v!)),
-                _buildRadio('制限する', 1, _viewModel.inactivityMode, (v) => _viewModel.setInactivityMode(v!)),
-              ],
-            ),
-          ),
-          FormRow(
-            label: '制限する',
-            content: _buildTextField(
-              _viewModel.inactivitySeconds,
-              onChanged: (v) => _viewModel.setInactivitySeconds(v),
-              enabled: _viewModel.inactivityMode == 1,
-            ),
-            showInfo: false,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTaxRateSection() {
-    return FormCard(
-      title: '税率',
-      child: Column(
-        children: [
-          FormRow(
-            label: '消費税率',
-            content: _buildTextField(
-              _viewModel.consumptionTax,
-              onChanged: (v) => _viewModel.setConsumptionTax(v),
-            ),
-          ),
-          FormRow(
-            label: '軽減税率',
-            content: _buildTextField(
-              _viewModel.reducedTax,
-              onChanged: (v) => _viewModel.setReducedTax(v),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildEraSection() {
-    return FormCard(
-      title: '印字年号',
-      child: Column(
-        children: [
-          FormRow(
-            label: '印字年号',
-            content: Row(
-              children: [
-                _buildRadio('西暦', 0, _viewModel.eraMode, (v) => _viewModel.setEraMode(v!)),
-                _buildRadio('和暦', 1, _viewModel.eraMode, (v) => _viewModel.setEraMode(v!)),
-              ],
-            ),
-          ),
-          FormRow(
-            label: '和暦基準年',
-            content: _buildTextField(
-              _viewModel.eraBaseYear,
-              onChanged: (v) => _viewModel.setEraBaseYear(v),
-            ),
-          ),
-          FormRow(
-            label: '和暦マーク',
-            content: _buildTextField(
-              _viewModel.eraMark,
-              onChanged: (v) => _viewModel.setEraMark(v),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRadio(String label, int value, int groupValue, ValueChanged<int?> onChanged) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+  Widget _buildGrid() {
+    return Wrap(
+      spacing: 24.w,
+      runSpacing: 24.h,
       children: [
-        Radio<int>(
-          value: value,
-          groupValue: groupValue,
-          onChanged: onChanged,
-          activeColor: const Color(0xFF0F1ED2),
-          visualDensity: VisualDensity.compact,
+        _HomeCard(
+          title: 'チケット設定',
+          description: '券売機の運用設定および販売画面の表示レイアウトを一括管理します。',
+          icon: Icons.confirmation_num_outlined,
+          iconBgColor: const Color(0xFF4F46E5),
+          onTap: () {},
         ),
-        Text(
-          label,
-          style: TextStyle(fontSize: 13.sp, color: const Color(0xFF374151)),
+        _HomeCard(
+          title: 'ガイド画面・言語設定',
+          description: '初期案内画面のレイアウトおよび多言語表示の翻訳設定を行います。',
+          icon: Icons.language,
+          iconBgColor: const Color(0xFF4338CA),
+          onTap: () {},
         ),
-        SizedBox(width: 12.w),
+        _HomeCard(
+          title: 'カテゴリー画面設定',
+          description: 'メニューカテゴリーの選択画面のボタン配置やデザインを調整します。',
+          icon: Icons.grid_view_rounded,
+          iconBgColor: const Color(0xFF7C3AED),
+          onTap: () => context.go('/menu-button-master'),
+        ),
+        _HomeCard(
+          title: '商品画面設定',
+          description: '商品一覧画面のレイアウト、商品画像の表示形式を設定します。',
+          icon: Icons.view_list_outlined,
+          iconBgColor: const Color(0xFFDB2777),
+          onTap: () => context.go('/product-area'),
+        ),
+        _HomeCard(
+          title: 'サイズ・数量・おすすめ画面',
+          description: 'トッピング、サイズ選択、おすすめ商品のポップアップ画面を管理します。',
+          icon: Icons.menu_rounded,
+          iconBgColor: const Color(0xFFEF4444),
+          onTap: () {},
+        ),
+        _HomeCard(
+          title: '注文確認画面設定',
+          description: '注文内容の最終確認画面および購入ボタンの配置設定を行います。',
+          icon: Icons.verified_outlined,
+          iconBgColor: const Color(0xFF10B981),
+          onTap: () {},
+        ),
+        _HomeCard(
+          title: '電子データ出力',
+          description: '運用設定データ(XML)および売上集計データ(CSV/JSON)の出力を行います。',
+          icon: Icons.storage_rounded,
+          iconBgColor: const Color(0xFF6B7280),
+          onTap: () {},
+        ),
       ],
     );
   }
+}
 
-  Widget _buildTextField(String initialValue, {ValueChanged<String>? onChanged, bool enabled = true}) {
-    return TextFormField(
-      initialValue: initialValue,
-      enabled: enabled,
-      onChanged: onChanged,
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        isDense: true,
-        contentPadding: EdgeInsets.symmetric(vertical: 12.h),
+class _HomeCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final IconData icon;
+  final Color iconBgColor;
+  final VoidCallback onTap;
+
+  const _HomeCard({
+    required this.title,
+    required this.description,
+    required this.icon,
+    required this.iconBgColor,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16.w),
+      child: Container(
+        width: 280.w,
+        height: 180.h,
+        padding: EdgeInsets.all(20.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.w),
+          border: Border.all(color: const Color(0xFFE5E7EB)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 44.w,
+              height: 44.w,
+              decoration: BoxDecoration(
+                color: iconBgColor,
+                borderRadius: BorderRadius.circular(10.w),
+              ),
+              child: Icon(
+                icon,
+                color: Colors.white,
+                size: 22.sp,
+              ),
+            ),
+            SizedBox(height: 16.h),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+                color: const Color(0xFF1F2937),
+                letterSpacing: -0.5,
+              ),
+            ),
+            SizedBox(height: 6.h),
+            Expanded(
+              child: Text(
+                description,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  color: const Color(0xFF6B7280),
+                  height: 1.4,
+                  letterSpacing: -0.2,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      style: TextStyle(fontSize: 13.sp),
     );
   }
 }

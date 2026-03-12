@@ -50,6 +50,10 @@ dependencies:
   slang_flutter: ^4.12.1
   connectivity_plus: ^6.1.4
   flutter_svg: ^2.0.10
+  flutter_colorpicker: ^1.1.0
+  image_picker: ^1.2.1
+  reorderable_grid_view: ^2.2.8
+  reorderables: ^0.6.0
 
 dev_dependencies:
   flutter_test:

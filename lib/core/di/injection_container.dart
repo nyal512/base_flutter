@@ -14,6 +14,8 @@ import '../../domain/repositories/post_repository.dart';
 import '../../domain/usecases/get_posts.dart';
 // Presentation
 import '../../presentation/views/home/view_model/home_view_model.dart';
+import '../../presentation/views/menu_button_master/view_model/menu_button_master_view_model.dart';
+import '../../presentation/views/product_area/view_model/product_area_view_model.dart';
 
 final sl = GetIt.instance;
 
@@ -46,6 +48,8 @@ Future<void> init() async {
 
   // ViewModels - LazySingleton: share instance between content and layout
   sl.registerLazySingleton(() => HomeViewModel(getPosts: sl()));
+  sl.registerLazySingleton(() => MenuButtonMasterViewModel());
+  sl.registerLazySingleton(() => ProductAreaViewModel());
 
   // Use cases
   sl.registerLazySingleton(() => GetPosts(sl()));

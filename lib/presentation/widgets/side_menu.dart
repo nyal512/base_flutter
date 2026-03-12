@@ -33,19 +33,23 @@ class SideMenu extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.fromLTRB(0, 8.h, 0, 16.h),
               children: [
-                _buildMenuItem(context, '販売モード', 'assets/icons/ic_store.svg', '/'),
-                _buildMenuItem(context, 'ブザー音／音声', 'assets/icons/ic_sound.svg', '/sound'),
-                _buildMenuItem(context, '入金金種', 'assets/icons/ic_money.svg', '/payment'),
-                _buildMenuItem(context, '入金制限', 'assets/icons/ic_wallet.svg', '/limit'),
-                _buildMenuItem(context, '号機', 'assets/icons/ic_fingerprint.svg', '/machine'),
-                _buildMenuItem(context, '発券連番', 'assets/icons/ic_receipt.svg', '/ticket'),
+                _buildMenuItem(context, '商品エリア', 'assets/icons/ic_product_area.svg', '/product-area'),
+                _buildMenuItem(context, '商品エリア', 'assets/icons/ic_briefcase.svg', '/'),
+                _buildMenuItem(context, 'メニューボタンマスター', 'assets/icons/ic_menu_button_master.svg', '/menu-button-master'),
+                _buildMenuItem(context, '連携設定', 'assets/icons/ic_list_dashes.svg', '/sync-settings'),
+                _buildMenuItem(context, '棚指定', 'assets/icons/ic_table.svg', '/shelf-designation'),
+                _buildMenuItem(context, 'メニュー管理', 'assets/icons/ic_list_dashes.svg', '/menu-management'),
+                _buildMenuItem(context, 'グループ', 'assets/icons/ic_tree_view.svg', '/group'),
+                _buildMenuItem(context, 'カテゴリ', 'assets/icons/ic_grid_four.svg', '/category'),
                 _buildMenuItem(context, '集計様式', 'assets/icons/ic_table.svg', '/report'),
-                _buildMenuItem(context, '集計時間帯', 'assets/icons/ic_database.svg', '/time'),
-                _buildMenuItem(context, '操作印字', 'assets/icons/ic_printer.svg', '/print'),
-                _buildMenuItem(context, 'ネットワーク', 'assets/icons/ic_envelope.svg', '/network'),
-                _buildMenuItem(context, 'オーダリング', 'assets/icons/ic_list_dashes.svg', '/ordering'),
-                _buildMenuItem(context, 'FTP', 'assets/icons/ic_cloud.svg', '/ftp'),
-                _buildMenuItem(context, '親子', 'assets/icons/ic_tree_view.svg', '/parent'),
+                _buildMenuItem(context, 'QRコード', 'assets/icons/ic_receipt.svg', '/qr'),
+                _buildMenuItem(context, 'バーコード', 'assets/icons/ic_receipt.svg', '/barcode'),
+                _buildMenuItem(context, '操作案内', 'assets/icons/ic_printer.svg', '/guide'),
+                _buildMenuItem(context, '画面構成', 'assets/icons/ic_grid_four.svg', '/layout'),
+                _buildMenuItem(context, 'お知らせ', 'assets/icons/ic_envelope.svg', '/notifications'),
+                _buildMenuItem(context, 'データ初期化', 'assets/icons/ic_database.svg', '/data-reset'),
+                _buildMenuItem(context, 'ネットワーク', 'assets/icons/ic_cloud.svg', '/network'),
+                _buildMenuItem(context, 'ログインパスワード', 'assets/icons/ic_fingerprint.svg', '/password'),
               ],
             ),
           ),
@@ -114,30 +118,26 @@ class SideMenu extends StatelessWidget {
     bool isExpansion = false,
   }) {
     final isActive = currentRoute == route;
-    final primaryColor = const Color(0xFF6366F1);
+    final activeColor = const Color(0xFF1D4ED8);
 
     return InkWell(
       onTap: () => context.go(route),
       child: Container(
-        height: 48.h,
+        height: 40.h,
+        margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
         decoration: BoxDecoration(
-          color: isActive ? Colors.indigo.shade50.withOpacity(0.5) : Colors.transparent,
-          border: Border(
-            left: BorderSide(
-              color: isActive ? primaryColor : Colors.transparent,
-              width: 3.w,
-            ),
-          ),
+          color: isActive ? activeColor : Colors.transparent,
+          borderRadius: BorderRadius.circular(6.w),
         ),
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: Row(
           children: [
             SvgPicture.asset(
               pathIcon,
-              width: 18.sp,
-              height: 18.sp,
+              width: 18.w,
+              height: 18.w,
               colorFilter: ColorFilter.mode(
-                isActive ? primaryColor : Colors.grey.shade600,
+                isActive ? Colors.white : const Color(0xFF4B5563),
                 BlendMode.srcIn,
               ),
             ),
@@ -146,16 +146,20 @@ class SideMenu extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  color: isActive ? primaryColor : Colors.grey.shade700,
-                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                  fontSize: 12.sp,
+                  color: isActive ? Colors.white : const Color(0xFF374151),
+                  fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+                  fontSize: 13.sp,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             if (isExpansion)
-              Icon(Icons.keyboard_arrow_down, size: 16.sp, color: Colors.grey.shade400),
+              Icon(
+                Icons.keyboard_arrow_down,
+                size: 16.sp,
+                color: isActive ? Colors.white : const Color(0xFF9CA3AF),
+              ),
           ],
         ),
       ),

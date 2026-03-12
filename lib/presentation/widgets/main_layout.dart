@@ -9,12 +9,14 @@ class MainLayout extends StatelessWidget {
   final Widget child;
   final String currentRoute;
   final bool showSideMenu;
+  final bool showHeader;
 
   const MainLayout({
     super.key,
     required this.child,
     required this.currentRoute,
     this.showSideMenu = true,
+    this.showHeader = true,
   });
 
   HomeViewModel get _viewModel => sl<HomeViewModel>();
@@ -30,33 +32,32 @@ class MainLayout extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                AppHeader(
-                  title: '',
-                  actions: [
-                    const Spacer(),
-                    SizedBox(width: 60.w),
-                    _buildSearchBox(),
-                    const Spacer(),
-                    _buildUploadButton(),
-                    SizedBox(width: 12.w),
-                    _buildSaveButton(),
-                  ],
-                ),
+                if (showHeader)
+                  AppHeader(
+                    title: '',
+                    actions: [
+                      const Spacer(),
+                      SizedBox(width: 60.w),
+                      _buildSearchBox(),
+                      const Spacer(),
+                      _buildUploadButton(),
+                      SizedBox(width: 12.w),
+                      _buildSaveButton(),
+                    ],
+                  ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.all(8.w),
+                    padding: showHeader ? EdgeInsets.all(8.w) : EdgeInsets.zero,
+                    color: Colors.transparent,
                     child: Container(
-                      color: Colors.white,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xFFCCCCCC).withOpacity(0.5)),
-                          borderRadius: BorderRadius.circular(4.w),
-                        ),
-                        padding: EdgeInsets.all(8.w),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4.w),
-                          child: child,
-                        ),
+                      decoration: showHeader ? BoxDecoration(
+                        border: Border.all(color: const Color(0xFFCCCCCC).withOpacity(0.5)),
+                        borderRadius: BorderRadius.circular(4.w),
+                      ) : null,
+                      padding: showHeader ? EdgeInsets.all(8.w) : EdgeInsets.zero,
+                      child: ClipRRect(
+                        borderRadius: showHeader ? BorderRadius.circular(4.w) : BorderRadius.zero,
+                        child: child,
                       ),
                     ),
                   ),
